@@ -13,8 +13,7 @@ public class CyclicRedundancyCodeService {
         String tempMessage = "";
         String addonMsg = "";
         System.out.println("Initial msg: " + message);
-        for (int i = 0; i < (generatedCode.length()-1); i++)
-        {
+        for (int i = 0; i < (generatedCode.length() - 1); i++) {
             message = message.concat("0");
 
         }
@@ -26,7 +25,7 @@ public class CyclicRedundancyCodeService {
         System.out.println("The divider is: " + tempMessage);
         message = message.replaceFirst(tempMessage, "");
         System.out.println("Remaining MSG: " + message);
-        System.out.println("Calculating the remainder of the division: "+tempMessage+" by " +generatedCode);
+        System.out.println("Calculating the remainder of the division: " + tempMessage + " by " + generatedCode);
         tempMessage = calculateXOR(tempMessage, generatedCode);
         System.out.println("the remainder is: " + tempMessage);
 
@@ -35,10 +34,10 @@ public class CyclicRedundancyCodeService {
 
 
             Integer numberOfCharsToAdd = generatedCode.length() - tempMessage.length();
-            if (message.length()<numberOfCharsToAdd)
-            {
+            if (message.length() < numberOfCharsToAdd) {
                 tempMessage = tempMessage.concat(message);
                 System.out.println("FINAL remainder is: " + tempMessage);
+                tempMessage = fillWithZeros(tempMessage, generatedCode.length());
                 return tempMessage;
             }
             for (int i = 0; i < numberOfCharsToAdd; i++) {
@@ -47,21 +46,21 @@ public class CyclicRedundancyCodeService {
             tempMessage = tempMessage.concat(addonMsg);
             System.out.println("The new divider is " + tempMessage);
             message = message.replaceFirst(addonMsg, "");
-            addonMsg="";
+            addonMsg = "";
             System.out.println("Remaining msg: " + message);
-            System.out.println("Calculating the remainder of the division: "+tempMessage+" by " +generatedCode);
-            tempMessage  = calculateXOR(tempMessage, generatedCode);
+            System.out.println("Calculating the remainder of the division: " + tempMessage + " by " + generatedCode);
+            tempMessage = calculateXOR(tempMessage, generatedCode);
 
             System.out.println("the remainder is: " + tempMessage);
             System.out.println("===============================");
         } while (!message.isEmpty());
 
         System.out.println("FINAL remainder is: " + tempMessage);
-
+        tempMessage = fillWithZeros(tempMessage, generatedCode.length());
         return tempMessage;
     }
 
-    public String calculateXOR(String message1, String message2) {
+    private String calculateXOR(String message1, String message2) {
         String rezultString = "";
 
         for (int i = 0; i < message1.length(); i++) {
@@ -74,7 +73,7 @@ public class CyclicRedundancyCodeService {
         return removeZeros(rezultString);
     }
 
-    public String removeZeros(String message) {
+    private String removeZeros(String message) {
         String tempMsg = message;
 
         while (tempMsg.charAt(0) == '0') {
@@ -85,5 +84,13 @@ public class CyclicRedundancyCodeService {
         }
 
         return tempMsg;
+    }
+
+    private String fillWithZeros(String message, Integer finalLength) {
+        while (message.length() < (finalLength-1))
+        {
+            message = "0".concat(message);
+        }
+        return message;
     }
 }
