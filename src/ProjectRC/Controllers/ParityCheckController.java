@@ -32,7 +32,7 @@ public class ParityCheckController {
         txt_InputText.setWrapText(true);
 
         try {
-            parityChecker.doSomething(txt_InputText.getText());
+            parityChecker.encodeUsingParityCheck(txt_InputText.getText());
             txt_ResultMsg.setText(parityChecker.getEncodedMessage());
         } catch (RuntimeException e) {
             txt_ErrorMsg.setText(e.getMessage());

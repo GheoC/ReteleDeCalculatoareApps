@@ -13,7 +13,7 @@ public class ParityCheckerService {
         this.encodedMessage = encodedMessage;
     }
 
-    public void doSomething(String message) {
+    public void encodeUsingParityCheck(String message) {
         MessageCheckerService.checkMessage(message);
         extractHorizontalSum(message);
         extractVerticalSum(message);

@@ -18,7 +18,15 @@ public class MessageCheckerService {
             if (message.charAt(i) != '0' && message.charAt(i) != '1') {
                 throw new NumberFormatException("Message must contain only 0 or 1");
             }
-
         }
+    }
+
+    public static void checkMessageLengthComparedToGeneratedCode(String message, String generatorCode)
+    {
+        if (message.length()<generatorCode.length())
+        {
+            throw new RuntimeException("The length of the message must be greater than the generator code");
+        }
+
     }
 }
